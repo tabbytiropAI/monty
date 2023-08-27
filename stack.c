@@ -1,17 +1,40 @@
-#include "monty.h"
 /**
-* free_stack - frees a doubly linked list
-* @head: head of the stack
-*/
-void free_stack(stack_t *head)
-{
-	stack_t *aux;
+ * init_stack - Initialize a struct stack type
+ * @top: A pointer to the top node of the stack
+ *
+ * np - Pointer to node
+ *
+ * Return: 1 if no errors otherwise 0.
+ */
+#include "monty.h"
 
-	aux = head;
-	while (head)
+int init_stack(stack_t **top)
+{
+	stack_t *np = (stack_t *)malloc(sizeof(stack_t));
+
+	if (np == NULL)
+		return (error_malloc());
+
+	*top = NULL;
+	return (EXIT_SUCCESS);
+}
+
+/**
+ * free_stack - free a struct stack type
+ * @top: A pointer to the top node of the stack
+ *
+ * np - Pointer to node
+ *
+ * Return: 1 if no errors otherwise 0
+ */
+void free_stack(stack_t **top)
+{
+	stack_t *tmp;
+
+	while (*top)
 	{
-		aux = head->next;
-		free(head);
-		head = aux;
+		tmp = (*top)->next;
+		free(*top);
+		*top = tmp;
 	}
-}}
+}
